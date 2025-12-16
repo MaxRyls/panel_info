@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Панель расчёта операций — макет</title>
+  <link rel="stylesheet" href="./css/styles.css"" />
+</head>
+
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-title">
+        <h1>Панель расчёта операций</h1>
+        <div class="sub">Тестовый макет: фильтры → аналитика → статусы загрузки</div>
+      </div>
+      <div class="badge"><span class="badge-dot"></span><span>режим прототипа</span></div>
+    </header>
+
+    <div class="shell">
+      <div class="tabs" role="tablist" aria-label="Вкладки панели">
+        <div class="tab-button active" data-tab="filters" role="tab" aria-selected="true" tabindex="0">
+          <span class="icon">🎛️</span><span>Фильтры и расчёт</span>
+        </div>
+        <div class="tab-button" data-tab="analytics" role="tab" aria-selected="false" tabindex="0">
+          <span class="icon">📊</span><span>Аналитика по офисам</span>
+        </div>
+        <div class="tab-button" data-tab="data" role="tab" aria-selected="false" tabindex="0">
+          <span class="icon">📁</span><span>Статусы загрузки</span>
+        </div>
+      </div>
+
+      <main>
+        <!-- TAB 1 -->
+        <section class="tab active" id="tab-filters">
+          <div class="filters-layout">
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">Фильтры расчёта</div>
+                  <div class="panel-subtitle">Офис · тип клиента · операция · время · два периода</div>
+                </div>
+              </div>
+
+              <div class="filters-grid">
+                <label class="field">
+                  <span>ОФИС</span>
+                  <select id="officeFilter">
+                    <option>Все офисы</option>
+                    <option>Офис Москва</option>
+                    <option>Офис Санкт-Петербург</option>
+                    <option>Офис Региональный</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>ТИП КЛИЕНТА</span>
+                  <select id="clientTypeFilter">
+                    <option>Все клиенты</option>
+                    <option>Физические лица</option>
+                    <option>Юридические лица</option>
+                    <option>VIP</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>ТИП ОПЕРАЦИИ</span>
+                  <select id="operationTypeFilter">
+                    <option>Все операции</option>
+                    <option>Открытие вклада</option>
+                    <option>Выдача кредита</option>
+                    <option>Перевод</option>
+                    <option>Снятие наличных</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>ВРЕМЯ</span>
+                  <input type="time" id="timeFilter" value="09:00" />
+                </label>
+              </div>
+
+              <div class="periods-grid">
+                <label class="field">
+                  <span>ПЕРИОД 1 · С</span>
+                  <input type="date" id="period1From" />
+                </label>
+                <label class="field">
+                  <span>ПЕРИОД 1 · ПО</span>
+                  <input type="date" id="period1To" />
+                </label>
+                <label class="field">
+                  <span>ПЕРИОД 2 · С</span>
+                  <input type="date" id="period2From" />
+                </label>
+                <label class="field">
+                  <span>ПЕРИОД 2 · ПО</span>
+                  <input type="date" id="period2To" />
+                </label>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn" id="btnExport">⬇️ Выгрузить данные</button>
+                <button class="btn btn-primary" id="btnBuildChart">📈 Построить график</button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">График операций</div>
+                  <div class="panel-subtitle">Заглушка: здесь будет график</div>
+                </div>
+              </div>
+
+              <div class="graph-placeholder" aria-label="Заглушка графика">
+                <div class="text">
+                  <b>Здесь будет график</b>
+                  <span>Подключим визуализацию после интеграции данных</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2 -->
+        <section class="tab" id="tab-analytics">
+          <div class="analytics-shell">
+
+            <div class="analytics-top">
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Панель аналитики по офисам</div>
+                    <div class="panel-subtitle">Выбери тип клиента, время, офисы и операции</div>
+                  </div>
+
+                  <div class="analytics-controls">
+                    <label class="field">
+                      <span>ТИП КЛИЕНТА</span>
+                      <select id="analyticsClientType">
+                        <option>Все клиенты</option>
+                        <option>Физические лица</option>
+                        <option>Юридические лица</option>
+                        <option>VIP</option>
+                      </select>
+                    </label>
+
+                    <label class="field">
+                      <span>ВРЕМЯ</span>
+                      <input type="time" id="analyticsTime" value="09:00" />
+                    </label>
+
+                    <button class="plus-btn" id="btnAddOffice" title="Добавить офис">+</button>
+                  </div>
+                </div>
+
+                <div class="panel-subtitle">
+                  Шапка: нажимай «+» чтобы добавить столбец с офисом. Внизу таблицы нажимай «+ операция».
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <div class="panel-title">Сводка</div>
+                    <div class="panel-subtitle">Заглушка под будущую логику</div>
+                  </div>
+                </div>
+
+                <div class="chip-row">
+                  <div class="chip">Тип клиента: <b id="summaryClientType">Все клиенты</b></div>
+                  <div class="chip">Время: <b id="summaryTime">09:00</b></div>
+                </div>
+
+                <div class="hint" style="margin-top:10px;">
+                  Здесь можно будет показать KPI/дельту/статусы после подключения данных.
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">Таблица по офисам и операциям</div>
+                  <div class="panel-subtitle">Без рандома: значения-заглушки “—”</div>
+                </div>
+              </div>
+
+              <div class="table-scroll">
+                <table class="analytics-table" id="analyticsTable">
+                  <thead>
+                  <tr id="analyticsHeaderRow">
+                    <th style="width: 170px;">Операция</th>
+                    <th>
+                      <select class="office-select">
+                        <option>Офис Москва</option>
+                        <option>Офис Санкт-Петербург</option>
+                        <option>Офис Региональный</option>
+                        <option>Офис Онлайн</option>
+                      </select>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody id="analyticsBody"></tbody>
+                </table>
+              </div>
+
+              <div class="analytics-footer">
+                <div>
+                  <button class="btn" id="btnAddOperationRow">✚ Операция</button>
+                </div>
+                <div>Подготовлено под реальные данные (вычисления будут позже)</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- TAB 3 -->
+        <section class="tab" id="tab-data">
+          <div class="data-layout">
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">Статусы загрузки по датам</div>
+                  <div class="panel-subtitle">Одна дата для вида</div>
+                </div>
+              </div>
+
+              <div class="date-card">
+                <div class="date-card-header">
+                  <div class="date-label">16.12.2025</div>
+                  <div class="panel-subtitle">статус по операциям</div>
+                </div>
+
+                <div class="op-row">
+                  <div class="op-name">Открытие вклада</div>
+                  <div class="op-pill"><span class="dot success"></span> Успешно</div>
+                </div>
+                <div class="op-row">
+                  <div class="op-name">Выдача кредита</div>
+                  <div class="op-pill"><span class="dot warn"></span> В процессе</div>
+                </div>
+                <div class="op-row">
+                  <div class="op-name">Перевод</div>
+                  <div class="op-pill"><span class="dot danger"></span> Неуспешно</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <div class="panel-title">Принудительная загрузка</div>
+                  <div class="panel-subtitle">Ручной запуск по типу операции и дате</div>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <label class="field">
+                  <span>ТИП ОПЕРАЦИИ</span>
+                  <select id="manualOpType">
+                    <option>Открытие вклада</option>
+                    <option>Выдача кредита</option>
+                    <option>Перевод</option>
+                    <option>Снятие наличных</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span>ДАТА ЗАГРУЗКИ</span>
+                  <input type="date" id="manualDate"/>
+                </label>
+
+                <button class="btn btn-primary" id="btnManualLoad">
+                  ⚙️ Запустить ручную загрузку
+                </button>
+
+                <div class="hint">Сейчас это заглушка: показывает уведомление.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <div class="i">✓</div>
+    <div class="t" id="toastText">Готово</div>
+  </div>
+
+  <script src="./js/app.js""></script>
+</body>
+</html>
